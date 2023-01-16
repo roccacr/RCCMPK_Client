@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const makeRequest = axios.create(
     {
-        baseURL: "http://localhost:3250/api",
+        //baseURL: "http://localhost:3250/api", //Desarrollo
+        baseURL: "http://marketplace.roccacr.com/api", //Producción.
         withCredentials: true,
     },
 )
