@@ -5,6 +5,7 @@ export const makeRequest = axios.create(
         //baseURL: "http://localhost:3250/api", //Desarrollo
         baseURL: "http://marketplace.roccacr.com/api", //Producción.
         withCredentials: true,
+        credentials: 'include',
     },
 )
 
