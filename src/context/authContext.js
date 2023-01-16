@@ -16,10 +16,16 @@ export const AuthContextProvider = ({ children }) => {
      * Porque debe obtener la información desde el API y desde la BD.
     */
     const login = async (inputs) => {
+        /* Desarrollo 
         const res = await axios.post("http://localhost:3250/api/auth/localLogin", inputs, {
             withCredentials: true,
         });
+        */
 
+        /**Producción */
+        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localLogin", inputs, {
+            withCredentials: true,
+        });
         setCurrentUser(res.data)
     };
 
@@ -30,9 +36,16 @@ export const AuthContextProvider = ({ children }) => {
      */
 
     const register = async (inputs) => {
-        const res = await axios.post("http://localhost:3250/api/auth/localRegister", inputs, {
+        /* Desarrollo 
+        const res = await axios.post("http://localhost:3250/api/auth/localLogin", inputs, {
             withCredentials: true,
-        })
+        });
+        */
+
+        /**Producción */
+        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localLogin", inputs, {
+            withCredentials: true,
+        });
 
         setCurrentUser(res.data);
     }
@@ -41,8 +54,16 @@ export const AuthContextProvider = ({ children }) => {
      * Esta es la funcionalidad para cerrar la sesión del usuario.
      */
     const logout = async () => {
-        const res = await axios.post("http://localhost:3250/api/auth/logout");
-        console.log(res);
+        /* Desarrollo 
+        const res = await axios.post("http://localhost:3250/api/auth/localLogin", inputs, {
+            withCredentials: true,
+        });
+        */
+
+        /**Producción */
+        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localLogin", inputs, {
+            withCredentials: true,
+        });
         setCurrentUser(null)
     }
 
@@ -52,7 +73,7 @@ export const AuthContextProvider = ({ children }) => {
 
     const setExternalUser = async (data) => {
         setCurrentUser(data);
-    } 
+    }
 
     /** El Use Effect se encargará de guaardar un objeto en la memoria Local, por esta razón es importante guardarlo como String.
      * Esto lo logramos haciendo un JSON.stringify del usuario.
@@ -62,7 +83,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, register, logout, setExternalUser}}>
+        <AuthContext.Provider value={{ currentUser, login, register, logout, setExternalUser }}>
             {children}
         </AuthContext.Provider>
     );

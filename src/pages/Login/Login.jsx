@@ -36,10 +36,12 @@ const Login = () => {
         }
     };
     const google = () => { //Inicio de sesión con google.
-        window.open("http://localhost:3250/api/auth/google", "_self");
+        //window.open("http://localhost:3250/api/auth/google", "_self"); //Desarrollo
+        window.open("http://marketplace.roccacr.com/api/auth/google", "_self"); //Producción.
     }
     const facebook = () => { //Inicio de sesión con google.
-        window.open("http://localhost:3250/api/auth/facebook", "_self");
+        //window.open("http://localhost:3250/api/auth/facebook", "_self"); //Desarrollo
+        window.open("http://marketplace.roccacr.com/api/auth/facebook", "_self"); //Producción.
     }
     //Retornamos contenido HTML a renderizar.
     return (
