@@ -37,16 +37,15 @@ export const AuthContextProvider = ({ children }) => {
 
     const register = async (inputs) => {
         /* Desarrollo 
-        const res = await axios.post("http://localhost:3250/api/auth/localLogin", inputs, {
+        const res = await axios.post("http://localhost:3250/api/auth/localRegister", inputs, {
             withCredentials: true,
-        });
+        })
         */
 
         /**Producción */
-        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localLogin", inputs, {
+        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localRegister", inputs, {
             withCredentials: true,
-        });
-
+        })
         setCurrentUser(res.data);
     }
 
@@ -54,16 +53,9 @@ export const AuthContextProvider = ({ children }) => {
      * Esta es la funcionalidad para cerrar la sesión del usuario.
      */
     const logout = async () => {
-        /* Desarrollo 
-        const res = await axios.post("http://localhost:3250/api/auth/localLogin", inputs, {
-            withCredentials: true,
-        });
-        */
-
-        /**Producción */
-        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localLogin", inputs, {
-            withCredentials: true,
-        });
+        // const res = await axios.post("http://localhost:3250/api/auth/logout"); //Desarrollo.
+        const res = await axios.post("http://marketplace.roccacr.com/api/auth/logout");
+        console.log(res);
         setCurrentUser(null)
     }
 
