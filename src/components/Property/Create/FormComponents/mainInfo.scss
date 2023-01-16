@@ -1,0 +1,106 @@
+.container-mainInfo {
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 20px;
+
+    border: 1px solid grey;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .mainInfo-radio {
+        padding: 10px;
+
+        h6 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        label {
+            line-height: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px;
+
+            input {
+                margin-right: 10px
+            }
+
+            ;
+        }
+    }
+
+    .mainInfo-category {
+        padding: 10px;
+        display: flex;
+        justify-content: left;
+        gap: 10px;
+
+        h6 {
+            width: 20%;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        select {
+            font-size: 16px;
+            width: 30%;
+            height: 40px
+        }
+    }
+
+    .mainInfo-info {
+        display: flex;
+        flex-direction: column;
+
+        .info-general {
+            display: flex;
+            justify-content: left;
+            text-align: left;
+            gap: 20px;
+            width: 100%;
+            padding: 10px;
+
+            label {
+                font-size: 20px;
+                font-weight: 500;
+                width: 20%;
+            }
+
+            input {
+                width: 30%;
+            }
+        }
+
+        .info-textArea {
+            padding: 10px;
+            label{
+                font-size: 20px;
+                font-weight: 500;
+                width: 20%;
+            }
+            textarea {
+                padding: 10px;
+                width: 100%;
+            }
+        }
+
+        .info-interior-spaces {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+
+            label{
+                font-size: 20px;
+                font-weight: 500;
+                width: 15%;
+            }
+            input {
+                width: 15%;
+            }
+        }
+    }
+}

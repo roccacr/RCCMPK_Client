@@ -1,0 +1,36 @@
+.property {
+    border: 1px solid gainsboro;
+    height: 400px;
+    width: 100%;
+
+    //Box Shadow
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.25);
+
+    .up {
+        height: 250px;
+        border-bottom: 1px solid gainsboro;
+    }
+
+    .down {
+        padding: 10px;
+        height: 140px;
+
+        .price {
+            height: 40px;
+            text-align: start;
+        }
+
+        .mainInfo {
+            height: 40px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .otherInfo {
+            height: 40px;
+        }
+
+    }
+}

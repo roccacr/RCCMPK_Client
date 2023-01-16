@@ -1,0 +1,45 @@
+.navigationBar {
+    height: 80px;
+
+    .navigationBar-logo {
+        display: flex;
+        gap: 10px;
+        text-align: center;
+        margin: auto 10px;
+        padding: 10px 30px;
+        color: rgb(114, 63, 60);
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+
+
+
+
+
+
+    .navigationBar-loginInfo {
+        button {
+            height: 40px;
+            border: 1px solid rgba(114, 63, 60, 0.8);
+            background-color: transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba(114, 63, 60, 0.8);
+                a{
+                    color: white;
+                }
+            }
+
+            a {
+                height: 100%;
+                color: rgb(114, 63, 60);
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 18px;
+            }
+        }
+    }
+}
