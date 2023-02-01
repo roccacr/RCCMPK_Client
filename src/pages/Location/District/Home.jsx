@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from "@tanstack/react-query";
 
 //Importamos los archivos necesarios.
-import { makeRequest } from '../../../config.js/axios';
+import { makeRequest } from '../../../config/axios';
 
 //Importamos los componentes relacionadas.
 import DistrictComponent from '../../../components/Location/District/District.jsx'
@@ -28,7 +28,7 @@ const Home = () => {
                 <div className="district-header">
                     <h1>Lista de Distritos</h1>
                     <button>
-                        <Link to="/location/district/create">
+                        <Link to="/admin/location/district/create">
                             Agregar Distritos
                         </Link>
                     </button>
@@ -49,6 +49,9 @@ const Home = () => {
                                                 <th>Ciudad</th>
                                                 <th>Id</th>
                                                 <th>Nombre</th>
+                                                <th>Código</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
                                                 <th colSpan={3}>Aciones</th>
                                             </tr>
                                         </thead>

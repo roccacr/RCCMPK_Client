@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from "../../context/authContext.js";
+import config, { ambiente } from '../../config/config';
 
 //Importamos los elementos de diseño.
 import "./login.scss"
@@ -36,12 +37,10 @@ const Login = () => {
         }
     };
     const google = () => { //Inicio de sesión con google.
-        //window.open("http://localhost:3250/api/auth/google", "_self"); //Desarrollo
-        window.open("http://marketplace.roccacr.com/api/auth/google", "_self"); //Producción.
+        window.open(`${config.baseUrl[ambiente]}/auth/google`, "_self")
     }
     const facebook = () => { //Inicio de sesión con google.
-        //window.open("http://localhost:3250/api/auth/facebook", "_self"); //Desarrollo
-        window.open("http://marketplace.roccacr.com/api/auth/facebook", "_self"); //Producción.
+        window.open(`${config.baseUrl[ambiente]}/auth/facebook`, "_self")
     }
     //Retornamos contenido HTML a renderizar.
     return (

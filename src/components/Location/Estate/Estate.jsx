@@ -1,6 +1,13 @@
+/**
+ * Componente para crear tabla con lista de estados o provincias.
+ */
+
+//Importamos las bibliotecas necesarias.
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { makeRequest } from '../../../config.js/axios'
+
+//Importamos los archivos necesarios.
+import { makeRequest } from '../../../config/axios'
 
 const Estate = ({ estate }) => {
     const handleDelete = async (id) => {
@@ -22,8 +29,11 @@ const Estate = ({ estate }) => {
                 <td> {estate.country.name}</td>
                 <td> {estate.id}</td>
                 <td> {estate.name}</td>
+                <td> {estate.code}</td>
+                <td> {estate.latitude}</td>
+                <td> {estate.longitude}</td>
                 <td>
-                    <button><Link to={`/location/estate/update/${estate.id}`}>Editar</Link></button>
+                    <button><Link to={`/admin/location/estate/update/${estate.id}`}>Editar</Link></button>
                     <button onClick={() => handleDelete(estate.id)}>Borrar</button>
                 </td>
             </tr>

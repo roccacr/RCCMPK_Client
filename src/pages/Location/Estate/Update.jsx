@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { makeRequest } from '../../../config.js/axios'
 import { useQuery } from "@tanstack/react-query";
 import Select from "react-select";
+import { makeRequest } from '../../../config/axios'
+import { serverRoutes } from '../../../config/config';
 
 const Update = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const inputData = { countryId: null, name: null, code: null, latitude: null, longitude: null }
 
-    const inputData = { countryId: null, name: null }
-
-    const estateId = location.pathname.split("/")[4];
+    const estateId = location.pathname.split("/")[5];
 
     const [inputs, setInputs] = useState({ //useState para setear los inputs 
-        name: null,
+        name: null, code: null, latitude: null, longitude: null
     });
 
     const handleChange = (e) => { //Leer valor de inputs y asignarlo
@@ -22,7 +22,7 @@ const Update = () => {
     };
 
     const { isLoading: isLoadingEstate, error: errorEstate, data: dataEstate } = useQuery(["estateToUpdate"], () =>
-        makeRequest.get(`/lm/location/estateById/${estateId}`).then((response) => {
+        makeRequest.get(`${serverRoutes.findLocationEstateById}/${estateId}`).then((response) => {
             return response.data;
         }),
     )
@@ -59,6 +59,9 @@ const Update = () => {
             })
 
     inputData.name = inputs.name;
+    inputData.code = inputs.code;
+    inputData.latitude = inputs.latitude;
+    inputData.longitude = inputs.longitude;
     inputData.countryId = countrySelected.value;
 
     console.log(inputData);
@@ -83,7 +86,7 @@ const Update = () => {
             if (estate.data === 1) {
                 alert("Registro actualizado correctamente.")
             };
-            navigate("/location/estate");
+            navigate("/admin/location/estate");
         } catch (error) {
             console.log(error);
         }
@@ -94,8 +97,8 @@ const Update = () => {
             <div className="estate-header">
                 <h1>Actualizar Estado</h1>
                 <button>
-                    <Link to="/location/estate/">
-                        Lista de Estado
+                    <Link to="/admin/location/estate/">
+                    Volver a Lista de Estados
                     </Link>
                 </button>
             </div>
@@ -114,6 +117,12 @@ const Update = () => {
                                         <input type="text" placeholder={dataEstate.id} name='id' disabled />
                                         <label htmlFor="name">Nombre</label>
                                         <input type="text" placeholder={dataEstate.name} name='name' onChange={handleChange} />
+                                        <label htmlFor="name">Código</label>
+                                        <input type="text" placeholder={dataEstate.code} name='code' onChange={handleChange} />
+                                        <label htmlFor="name">Latitud</label>
+                                        <input type="text" placeholder={dataEstate.latitude} name='latitude' onChange={handleChange} />
+                                        <label htmlFor="longitude">Longitud</label>
+                                        <input type="text" placeholder={dataEstate.longitude} name='longitude' onChange={handleChange} />
                                         <button onClick={updateEstate}> Actualizar </button>
                                     </form>
                                 </div>

@@ -1,25 +1,29 @@
+/**
+ * Componente que se encargará de mosrar la barra de navegación horizontal.
+ */
+
+//Importamos las bibliotecas necesarias.
 import React, { useContext } from 'react'
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Link, useNavigate } from 'react-router-dom';
+
+
+//Importamos los archivos necesarios.
 import { AuthContext } from '../../context/authContext';
 
-
+//Estilos y visuales
 import "./navigationBar.scss";
 import { BsFillHouseFill } from "react-icons/bs"
 import { FaUser } from "react-icons/fa";
-import { Link } from 'react-router-dom';
-
-
-
 
 const NavigationBar = () => {
+    const navigate = useNavigate();
     const { currentUser, logout } = useContext(AuthContext);
-
     const handleLogout = async (e) => {
         e.preventDefault();
         try{
             const res = await logout();
-            console.log(res);
-            //navigate("/")
+            navigate("/")
         }catch (err){
             console.log(err);
         }

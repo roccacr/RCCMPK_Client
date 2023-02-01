@@ -1,15 +1,19 @@
 import React from 'react'
 
-import Location from '../../components/Location/Location'
+import Location from '../../components/Location/Config';
+import Property from '../../components/Property/Config';
+import "./admin.scss"
 
 const Admin = () => {
     return (
-        
-        <div>
+        <div className='admin'>
             <div className="left">
                 <Location />
+                <Property />
             </div>
-            <div className="center">Centrado</div>
+            <div className="container">
+                <div className="center">Centrado</div>
+            </div>
         </div>
     )
 }

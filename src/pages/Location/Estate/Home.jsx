@@ -1,6 +1,7 @@
 import React from 'react'
-import { makeRequest } from '../../../config.js/axios';
 import { useQuery } from "@tanstack/react-query";
+import { makeRequest } from '../../../config/axios';
+import { serverRoutes } from '../../../config/config';
 
 //Importamos las páginas relacionadas.
 import EstateComponent from '../../../components/Location/Estate/Estate.jsx';
@@ -9,7 +10,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
 
     const { isLoading, error, data } = useQuery(["estates"], () =>
-        makeRequest.get("/lm/location/estate/List")
+        makeRequest.get(serverRoutes.listLocationEstate)
             .then((response) => {
                 return response.data;
             })
@@ -22,7 +23,7 @@ const Home = () => {
                 <div className="estate-header">
                     <h1>Lista de Estados</h1>
                     <button>
-                        <Link to="/location/estate/create">
+                        <Link to="/admin/location/estate/create">
                             Agregar Estado
                         </Link>
                     </button>
@@ -40,6 +41,9 @@ const Home = () => {
                                                 <th>País</th>
                                                 <th>Id</th>
                                                 <th>Nombre</th>
+                                                <th>Código</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
                                                 <th colSpan={3}>Aciones</th>
                                             </tr>
                                         </thead>

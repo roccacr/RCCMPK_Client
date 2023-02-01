@@ -1,100 +1,75 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import FormContext from '../../../../context/formContext';
+import { FaBed, FaShower, FaParking } from "react-icons/fa"
 
 import "./propertyInfo.scss"
+import { Form, Row, Col } from 'react-bootstrap';
+
+const currentYear = new Date().getFullYear();
 
 const PropertyInfo = () => {
 
-    const [propType, setPropType] = useState("new");
+    const { propertyInfo, setPropertyInfo, } = useContext(FormContext);
 
-    const handlePropType = (e) => {
-        setPropType(e.target.value)
+    const handlePropertyInfo = (e) => {
+        setPropertyInfo({ ...propertyInfo, [e.target.name]: e.target.value })
     }
 
     return (
-        <div className='container-mainInfo'>
-            <div className="mainInfo-radio">
-                <h6>Condición de la Propiedad</h6>
-                {/* Nueva */}
-                <label htmlFor="new">
-                    <input className='radio-input'
-                        type="radio" name="propType" value="new" id='new'
-                        checked={propType === "new"}
-                        onChange={handlePropType}
-                    />
-                    Nueva
-                </label>
-                {/* Remodelada */}
-                <label htmlFor="remodeled">
-                    <input className='radio-input'
-                        type="radio" name="propType" value="remodeled" id='remodeled'
-                        checked={propType === "remodeled"}
-                        onChange={handlePropType}
-                    />
-                    Remodelada
-                </label>
-                {/* Para Remodelar */}
-                <label htmlFor="toRemodel">
-                    <input className='radio-input'
-                        type="radio" name="propType" value="toRemodel" id='toRemodel'
-                        checked={propType === "toRemodel"}
-                        onChange={handlePropType}
-                    />
-                    Para Remodelar
-                </label>
-                {/* Para Desarrollar */}
-                <label htmlFor="toDevelop">
-                    <input className='radio-input'
-                        type="radio" name="propType" value="toDevelop" id='toDevelop'
-                        checked={propType === "toDevelop"}
-                        onChange={handlePropType}
-                    />
-                    Para Desarrollar
-                </label>
-            </div>
-            <hr />
-            <div className="mainInfo-build-properties">
-                <label htmlFor="year">Año de Construcción</label>
-                <input type="int" placeholder='2023' name="year" />
-                <label htmlFor="size">Tamaño M²</label>
-                <input type="int" placeholder='150' name="size" />
-                <label htmlFor="width">Ancho</label>
-                <input type="int" placeholder='15' name="width" />
-                <label htmlFor="length">Largo</label>
-                <input type="int" placeholder='10' name="length" />
-            </div>
-            <hr />
-            <div className="mainInfo-build-details">
-                <div className="develop-details">
-                    <label htmlFor="constructorCompany">Constructora</label>
-                    <input type="int" placeholder='Desarrolladora ABC' name='constructorCompany' />
-                    <label htmlFor="engineer">Ingeniero</label>
-                    <input type="int" placeholder='Ing Ejemplo # 1' name='engineer' />
-                    <label htmlFor="architect">Arquitecto</label>
-                    <input type="int" placeholder='Arch Ejemplo # 1' name='architect' />
-                </div>
-                <hr />
-                <div className="info-location">
-                    <div className="info-location-details">
-                        <label htmlFor="country"> País </label>
-                        <input type="text" placeholder='Costa Rica' name='country' />
-                        <label htmlFor="estate"> Provincia </label>
-                        <input type="text" placeholder='San José' name='estate' />
-                        <label htmlFor="city"> Cantón </label>
-                        <input type="text" placeholder='Santa Ana' name='city' />
-                        <label htmlFor="district"> Distrito </label>
-                        <input type="text" placeholder='Santa Ana' name='district' />
-                        <label htmlFor="details"> Detalle </label>
-                        <input type="text" placeholder='Santa Ana' name='details' />
-                    </div>
-                    <div className="info-map-location">
-                        <label htmlFor="map-location"> Ubicación Geográfica.</label>
-                        <textarea name="map-location" id="" rows="10">
-                            Aquí íría el componente de mapa.
-                        </textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <Form.Group>
+                <Row className="align-items-center">
+                    <Col sm={6} className="my-1">
+                        <Form.Label>Año de Construcción</Form.Label>
+                        <Form.Control type='number' name="buildYear" placeholder="Indique año de construcción" value={propertyInfo.buildYear} onChange={handlePropertyInfo} min="1900" max={currentYear} />
+                    </Col>
+                    <Col sm={6} className="my-1">
+                        <Form.Label>Área en M²</Form.Label>
+                        <Form.Control type='number' name="buildSize" placeholder="Área de construcción" value={propertyInfo.buildSize} onChange={handlePropertyInfo} min="0" />
+                    </Col>
+                </Row>
+                <Row className="align-items-center">
+                    <Col sm={6} className="my-1">
+                        <Form.Label>Ancho</Form.Label>
+                        <Form.Control type='number' name="buildWidth" placeholder="Ancho lineal" value={propertyInfo.buildWidth} onChange={handlePropertyInfo} min="0" />
+                    </Col>
+                    <Col sm={6} className="my-1">
+                        <Form.Label>Largo</Form.Label>
+                        <Form.Control type='number' name="buildLength" placeholder="Largo lineal." value={propertyInfo.buildLength} onChange={handlePropertyInfo} min="0" />
+                    </Col>
+                </Row>
+            </Form.Group>
+            <Form.Group>
+                <Row className="align-items-center">
+                    <Col sm={12} className="my-1">
+                        <Form.Label>Empresa Constructora</Form.Label>
+                        <Form.Control type='number' name="buildLength" placeholder="Nombre de la empresa encargada de la construcción." value={propertyInfo.buildCompany} onChange={handlePropertyInfo} />
+                    </Col>
+                    <Col sm={6} className="my-1">
+                        <Form.Label>Ingeniero</Form.Label>
+                        <Form.Control type='number' name="buildLength" placeholder="Nombre Ingeniero." value={propertyInfo.buildEngineer} onChange={handlePropertyInfo} />
+                    </Col>
+                    <Col sm={6} className="my-1">
+                        <Form.Label>Arquitecto</Form.Label>
+                        <Form.Control type='number' name="buildLength" placeholder="Nombre Arquitecto." value={propertyInfo.buildArchitect} onChange={handlePropertyInfo} />
+                    </Col>
+                </Row>
+                <Row className="align-items-center">
+                    <Col sm={4} className="my-1">
+                        <Form.Label> # Cuartos <FaBed /></Form.Label>
+                        <Form.Control type='number' name="buildLength" placeholder="Cant. Habitaciones." value={propertyInfo.bedrooms} onChange={handlePropertyInfo} />
+                    </Col>
+                    <Col sm={4} className="my-1">
+                        <Form.Label> # Baños <FaShower /></Form.Label>
+                        <Form.Control type='number' name="buildLength" placeholder="Cant. Baños." value={propertyInfo.bathrooms} onChange={handlePropertyInfo} />
+                    </Col>
+                    <Col sm={4} className="my-1">
+                        <Form.Label> # Parqueo <FaParking /></Form.Label>
+                        <Form.Control type='number' name="buildLength" placeholder="Cant. Espacios parqueo." value={propertyInfo.parking} onChange={handlePropertyInfo} />
+                    </Col>
+                </Row>
+            </Form.Group>
+        </>
     )
 }
 

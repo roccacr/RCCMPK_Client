@@ -1,7 +1,7 @@
 import React from 'react'
 
 //Importamos la configuración del Axios.
-import { makeRequest } from '../../config.js/axios'
+import { makeRequest } from '../../config/axios'
 //Importamos lo requerido para utilizar el React-Query
 import { useQuery } from "@tanstack/react-query";
 
@@ -44,7 +44,8 @@ const Home = () => {
                                 ? "Obteniendo Propiedades"
                                 : data.map(
                                     (property) =>
-                                        <Property property={property} key={property.id} />
+                                        //console.log(property)
+                                        < Property property = { property } key = { property.id } />
                                 )
                     }
                 </div>

@@ -15,7 +15,7 @@ import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
 
 const Property = ({ property }) => {
 
-    const imgArray = property.rm_propertyimage.imageUrl;
+    const imgArray = property.propertyImages.imageUrl;
     return (
         <div className='property'>
             <div className="up">
@@ -28,10 +28,10 @@ const Property = ({ property }) => {
                     <h3>${property.price}</h3>
                 </div>
                 <div className="mainInfo">
-                    <ShowerIcon /> <span>{property.bathrooms} |</span >
-                    <BedIcon /> <span>{property.bedrooms} | </span>
-                    <DirectionsCarIcon /><span>{property.parking} | </span>
-                    <StraightenOutlinedIcon /><span>{property.pm_land.size} m²</span>
+                    <ShowerIcon /> <span>{property.buildDetails.bathrooms} |</span >
+                    <BedIcon /> <span>{property.buildDetails.bedrooms} | </span>
+                    <DirectionsCarIcon /><span>{property.buildDetails.parking} | </span>
+                    <StraightenOutlinedIcon /><span>{property.propertyLand.landSize} m²</span>
 
                 </div>
                 <div className="otherInfo">

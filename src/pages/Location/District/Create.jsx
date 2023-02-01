@@ -9,14 +9,14 @@ import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 
 //Importamos los archivos necesarios.
-import { makeRequest } from '../../../config.js/axios'
+import { makeRequest } from '../../../config/axios'
 
 const Create = () => {
     //Declaración de variables, objetos y hooks.
     const navigate = useNavigate();
 
     const countryOptions = [];
-    const inputData = { estateId: "", name: "" }
+    const inputData = { estateId: "", name: "", code: "", latitude: "", longitude: "", }
 
     const [inputs, setInputs] = useState({ name: null });
     const [countrySelected, setCountrySelected] = useState({ value: null });
@@ -61,7 +61,6 @@ const Create = () => {
 
     //Actualiza estados según país seleccionado.
     const updateEstateList = (countryId) => {
-        console.log("Vamos a cambiar de país");
         const estateList = [];
         makeRequest.get(`/lm/location/estate/ListByCountryId/${countryId}`)
             .then((response) => {
@@ -98,7 +97,7 @@ const Create = () => {
     const updateCityList = (estateId) => {
         console.log("Vamos a cambiar de estado");
         const cityList = [];
-        makeRequest.get(`/lm/location/city/ListByCountryId/${estateId}`)
+        makeRequest.get(`/lm/location/city/ListByEstateId/${estateId}`)
             .then((response) => {
                 if (response.data.length > 0) {
                     cityList.push({ value: null, label: "Seleccione una ciudad" });
@@ -131,6 +130,10 @@ const Create = () => {
     //Asignación de Variables.
     inputData.name = inputs.name;
     inputData.cityId = citySelected.value;
+    inputData.code = inputs.code;
+    inputData.longitude = inputs.longitude;
+    inputData.latitude = inputs.latitude;
+
     //Creactión de la ciudad.
     const createDistrict = async (e) => {
         e.preventDefault();
@@ -141,7 +144,7 @@ const Create = () => {
             }
             const district = await makeRequest.post("/lm/location/district/Create", inputData);
             alert("Registro creado correctamente: " + district.data.id + " - " + district.data.name);
-            navigate("/location/district");
+            navigate("/admin/location/district");
 
         } catch (error) {
             console.log(error);
@@ -150,15 +153,15 @@ const Create = () => {
 
     return (
         <div className='container'>
-            <div className="city-header">
-                <h1>Crear Ciudad</h1>
+            <div className="district-header">
+                <h1>Crear Distrito</h1>
                 <button>
-                    <Link to="/location/city/">
-                        Lista de Ciudades
+                    <Link to="/admin/location/district/">
+                        Lista de Distritos
                     </Link>
                 </button>
             </div>
-            <div className="city-body">
+            <div className="district-body">
                 <div className="create-form">
                     <form action="">
                         <label htmlFor="País"></label>
@@ -167,6 +170,12 @@ const Create = () => {
                         <RenderCityList options={cityOptions} selected={citySelected.value != null ? citySelected : cityOptions[0]} />
                         <label htmlFor="name">Nombre</label>
                         <input type="text" placeholder='Pozos' name='name' onChange={handleChange} />
+                        <label htmlFor="code">Código</label>
+                        <input type="text" placeholder='12345' name='code' onChange={handleChange} />
+                        <label htmlFor="latitude">Latitud</label>
+                        <input type="text" placeholder='12.345' name='latitude'onChange={handleChange} />
+                        <label htmlFor="longitude">Longitud</label>
+                        <input type="text" placeholder='12.345' name='longitude' onChange={handleChange} />
                         <button onClick={createDistrict}> Enviar </button>
                     </form>
                 </div>

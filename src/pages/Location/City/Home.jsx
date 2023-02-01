@@ -5,7 +5,7 @@
 //Importamos las bibliotecas necesarias.
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { makeRequest } from '../../../config.js/axios';
+import { makeRequest } from '../../../config/axios';
 import { useQuery } from "@tanstack/react-query";
 
 //Importamos los componentes relacionadas.
@@ -27,7 +27,7 @@ const Home = () => {
                 <div className="city-header">
                     <h1>Lista de Ciudades</h1>
                     <button>
-                        <Link to="/location/city/create">
+                        <Link to="/admin/location/city/create">
                             Agregar Ciudad
                         </Link>
                     </button>
@@ -47,6 +47,9 @@ const Home = () => {
                                                 <th>Estado</th>
                                                 <th>Id</th>
                                                 <th>Nombre</th>
+                                                <th>Código</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
                                                 <th colSpan={3}>Aciones</th>
                                             </tr>
                                         </thead>

@@ -10,12 +10,14 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const Images = (imgArray) => {
 
     const imageArray = imgArray.imgArray
+    console.log(imageArray);
     const [currentImage, setCurrentImage] = useState(0);
 
     return (
         <div className="carousel">
             <div className="carouselInner"
-                style={{backgroundImage: `url(${imageArray[currentImage].url})`}} >
+                style={{backgroundImage: `url(${imageArray[currentImage]})`}} >
+                    {console.log(imageArray[currentImage])}
                 <div className="left"
                     onClick={() => { currentImage > 0 && setCurrentImage(currentImage - 1) }}>
                     {currentImage > 0 ? (<ArrowBackIosIcon style={{ fontSize: 30 }} />) : ("")}

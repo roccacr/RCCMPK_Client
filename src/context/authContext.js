@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
+import { makeRequest } from "../config/axios";
 
 /** Creamos un contexto, en este caso seré utilizado por autenticación. */
 export const AuthContext = createContext();
@@ -16,16 +16,10 @@ export const AuthContextProvider = ({ children }) => {
      * Porque debe obtener la información desde el API y desde la BD.
     */
     const login = async (inputs) => {
-        /* Desarrollo 
-        const res = await axios.post("http://localhost:3250/api/auth/localLogin", inputs, {
-            withCredentials: true,
-        });
-        */
+        const res = await makeRequest.post("/auth/localLogin", inputs, {
+            withCredentials: true
+        })
 
-        /**Producción */
-        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localLogin", inputs, {
-            withCredentials: true,
-        });
         setCurrentUser(res.data)
     };
 
@@ -36,14 +30,7 @@ export const AuthContextProvider = ({ children }) => {
      */
 
     const register = async (inputs) => {
-        /* Desarrollo 
-        const res = await axios.post("http://localhost:3250/api/auth/localRegister", inputs, {
-            withCredentials: true,
-        })
-        */
-
-        /**Producción */
-        const res = await axios.post("http://marketplace.roccacr.com/api/auth/localRegister", inputs, {
+        const res = await makeRequest.post("/auth/localRegister", inputs, {
             withCredentials: true,
         })
         setCurrentUser(res.data);
@@ -53,10 +40,8 @@ export const AuthContextProvider = ({ children }) => {
      * Esta es la funcionalidad para cerrar la sesión del usuario.
      */
     const logout = async () => {
-        // const res = await axios.post("http://localhost:3250/api/auth/logout"); //Desarrollo.
-        const res = await axios.post("http://marketplace.roccacr.com/api/auth/logout");
-        console.log(res);
-        setCurrentUser(null)
+        await makeRequest.post("/auth/logout");
+        setCurrentUser(null);
     }
 
     /**
@@ -73,6 +58,7 @@ export const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
     }, [currentUser]);
+
 
     return (
         <AuthContext.Provider value={{ currentUser, login, register, logout, setExternalUser }}>

@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import Select from "react-select";
 
 //Importamos los archivos necesarios.
-import { makeRequest } from '../../../config.js/axios'
+import { makeRequest } from '../../../config/axios'
 
 const Update = () => {
 
@@ -17,10 +17,10 @@ const Update = () => {
     const location = useLocation();
 
     const countryOptions = [];
-    const districtId = location.pathname.split("/")[4];
-    const inputData = { name: "default", cityId: "default" }
+    const districtId = location.pathname.split("/")[5];
+    const inputData = { cityId: "default", name: "default", code: "default", latitude: "", longitude: "" }
 
-    const [inputs, setInputs] = useState({ name: null, });
+    const [inputs, setInputs] = useState({ name: null, code: null, latitude: null, longitude: null });
     const [countrySelected, setCountrySelected] = useState({ value: "default" });
     const [estateSelected, setEstateSelected] = useState({ value: 'default' });
     const [citySelected, setCitySelected] = useState({ value: "default" });
@@ -115,7 +115,7 @@ const Update = () => {
     //Actualiza estados según país seleccionado.
     const updateCityList = (estateId, eventType) => {
         const cityList = [];
-        makeRequest.get(`/lm/location/city/ListByCountryId/${estateId}`)
+        makeRequest.get(`/lm/location/city/ListByEstateId/${estateId}`)
             .then((response) => {
                 if (response.data.length > 0) {
                     cityList.push({ value: null, label: "Seleccione una ciudad" });
@@ -150,8 +150,11 @@ const Update = () => {
     ) : null;
 
     //Establece la información definida en los formularios en una variable.
-    inputData.name = inputs.name;
     inputData.cityId = citySelected.value;
+    inputData.name = inputs.name;
+    inputData.code = inputs.code;
+    inputData.latitude = inputs.latitude;
+    inputData.longitude = inputs.longitude;
 
     //Función para procesar la actualización del distrito.
     const updateDistrict = async (e) => {
@@ -164,7 +167,7 @@ const Update = () => {
             }
 
             if (inputData.cityId === 'default') {
-                inputData.countryId = dataDistrict.city.id;
+                inputData.cityId = dataDistrict.city.id;
             }
 
             if (inputData.cityId === null) {
@@ -176,7 +179,7 @@ const Update = () => {
             if (estate.data === 1) {
                 alert("Registro actualizado correctamente.")
             };
-            navigate("/location/district");
+            navigate("/admin/location/district");
         } catch (error) {
             console.log(error);
         }
@@ -187,7 +190,7 @@ const Update = () => {
             <div className="district-header">
                 <h1>Actualizar Distrito</h1>
                 <button>
-                    <Link to="/location/district/">
+                    <Link to="/admin/location/district/">
                         Lista de Distritos
                     </Link>
                 </button>
@@ -223,10 +226,16 @@ const Update = () => {
                                                         ? citySelected
                                                         : cityOptions[0]
                                             } />
-                                        <label htmlFor="name">Id</label>
+                                        <label htmlFor="id">Id</label>
                                         <input type="text" placeholder={dataDistrict.id} name='id' disabled />
                                         <label htmlFor="name">Nombre</label>
                                         <input type="text" placeholder={dataDistrict.name} name='name' onChange={handleChange} />
+                                        <label htmlFor="code">Código</label>
+                                        <input type="text" placeholder={dataDistrict.code} name='code' onChange={handleChange} />
+                                        <label htmlFor="latitude">Latitude</label>
+                                        <input type="text" placeholder={dataDistrict.latitude} name='latitude' onChange={handleChange} />
+                                        <label htmlFor="longitude">Longitude</label>
+                                        <input type="text" placeholder={dataDistrict.longitude} name='longitude' onChange={handleChange} />
                                         <button onClick={updateDistrict}> Actualizar </button>
                                     </form>
                                 </div>

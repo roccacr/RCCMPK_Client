@@ -9,14 +9,14 @@ import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 
 //Importamos los archivos necesarios.
-import { makeRequest } from '../../../config.js/axios'
+import { makeRequest } from '../../../config/axios'
 
 const Create = () => {
     //Declaración de variables, objetos y hooks.
     const navigate = useNavigate();
 
     const countryOptions = [];
-    const inputData = { estateId: "", name: "" }
+    const inputData = { estateId: "", name: "", code: "", latitude: "", longitude: "", }
 
     const [inputs, setInputs] = useState({ name: null });
     const [countrySelected, setCountrySelected] = useState({ value: null });
@@ -87,7 +87,11 @@ const Create = () => {
     //Asignación de Variables.
     inputData.name = inputs.name;
     inputData.estateId = estateSelected.value;
-    //Creactión de la ciudad.
+    inputData.code = inputs.code;
+    inputData.latitude = inputs.latitude;
+    inputData.longitude = inputs.longitude;
+
+    //Creación de la ciudad.
     const createCity = async (e) => {
         e.preventDefault();
         try {
@@ -97,7 +101,7 @@ const Create = () => {
             }
             const city = await makeRequest.post("/lm/location/city/Create", inputData);
             alert("Registro creado correctamente: " + city.data.id + " - " + city.data.name);
-            navigate("/location/city");
+            navigate("/admin/location/city");
 
         } catch (error) {
             console.log(error);
@@ -108,7 +112,7 @@ const Create = () => {
             <div className="city-header">
                 <h1>Crear Ciudad</h1>
                 <button>
-                    <Link to="/location/city/">
+                    <Link to="/admin/location/city/">
                         Lista de Ciudades
                     </Link>
                 </button>
@@ -119,7 +123,13 @@ const Create = () => {
                         <Select id="" options={countryOptions} onChange={handleCountrySelected} />
                         <RenderEstateList options={estateOptions} selected={estateSelected.value != null ? estateSelected : estateOptions[0]} />
                         <label htmlFor="name">Nombre</label>
-                        <input type="text" placeholder='Costa Rica' name='name' onChange={handleChange} />
+                        <input type="text" placeholder='Perez Zeledón' name='name' onChange={handleChange} />
+                        <label htmlFor="code">Código</label>
+                        <input type="text" placeholder='PZ' name='code' onChange={handleChange} />
+                        <label htmlFor="latitude">Latitud</label>
+                        <input type="text" placeholder='0' name='latitude' onChange={handleChange} />
+                        <label htmlFor="longitude">Longitud</label>
+                        <input type="text" placeholder='0' name='longitude' onChange={handleChange} />
                         <button onClick={createCity}> Enviar </button>
                     </form>
                 </div>

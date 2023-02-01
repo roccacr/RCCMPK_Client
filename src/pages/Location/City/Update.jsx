@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import Select from "react-select";
 
 //Importamos los archivos necesarios.
-import { makeRequest } from '../../../config.js/axios'
+import { makeRequest } from '../../../config/axios'
 
 const Update = () => {
 
@@ -18,10 +18,10 @@ const Update = () => {
     const location = useLocation();
 
     const options = [];
-    const estateId = location.pathname.split("/")[4];
-    const inputData = { name: null, estateId: null }
+    const estateId = location.pathname.split("/")[5];
+    const inputData = { estateId: null, name: null, code: null, latitude: null, longitude: null }
 
-    const [inputs, setInputs] = useState({ name: null, });
+    const [inputs, setInputs] = useState({ name: null, code: null, latitude: null, longitude: null });
     const [countrySelected, setCountrySelected] = useState({ value: "default" });
     const [estateSelected, setEstateSelected] = useState({ value: 'default' });
     const [estateOptions, setEstateOptions] = useState([]);
@@ -98,41 +98,45 @@ const Update = () => {
         <Select id="" defaultValue={selected} options={options} onChange={setEstateSelected} />
     ) : null;
 
-        //Establece la información definida en los formularios en una variable.
-        inputData.name = inputs.name;
-        inputData.estateId = estateSelected.value;
-    
-        //Función para procesar la actualización de la ciudad.
-        const updateCity = async (e) => {
-            try {
-                e.preventDefault();
-    
-                if (inputData.name === null) {
-                    console.log("El nombre no puede quedar en blanco");
-                    return;
-                }
-    
-                if (inputData.estateId === null) {
-                    inputData.countryId = dataCity.estate.id;
-                    return;
-                }
-    
-                const estate = await makeRequest.put(`/lm/location/city/Update/${estateId}`, inputData);
-                if (estate.data === 1) {
-                    alert("Registro actualizado correctamente.")
-                };
-                navigate("/location/city");
-            } catch (error) {
-                console.log(error);
+    //Establece la información definida en los formularios en una variable.
+    inputData.estateId = estateSelected.value;
+    inputData.name = inputs.name;
+    inputData.code = inputs.code;
+    inputData.latitude = inputs.latitude;
+    inputData.longitude = inputs.longitude;
+
+    //Función para procesar la actualización de la ciudad.
+    const updateCity = async (e) => {
+        try {
+            e.preventDefault();
+
+            if (inputData.name === null) {
+                console.log("El nombre no puede quedar en blanco");
+                return;
             }
+
+            if (inputData.estateId === null) {
+                inputData.countryId = dataCity.estate.id;
+                return;
+            }
+
+            const city = await makeRequest.put(`/lm/location/city/Update/${estateId}`, inputData);
+            console.log(city);
+            if (city.data === 1) {
+                alert("Registro actualizado correctamente.")
+            };
+            navigate("/admin/location/city");
+        } catch (error) {
+            console.log(error);
         }
+    }
     //Inicia segmento HTML.
     return (
         <div className='container'>
             <div className="city-header">
                 <h1>Actualizar Ciudad</h1>
                 <button>
-                    <Link to="/location/city/">
+                    <Link to="/admin/location/city/">
                         Lista de Ciudades
                     </Link>
                 </button>
@@ -165,6 +169,13 @@ const Update = () => {
                                         <input type="text" placeholder={dataCity.id} name='id' disabled />
                                         <label htmlFor="name">Nombre</label>
                                         <input type="text" placeholder={dataCity.name} name='name' onChange={handleChange} />
+                                        <label htmlFor="code">Código</label>
+                                        <input type="text" placeholder={dataCity.code} name='code' onChange={handleChange} />
+                                        <label htmlFor="latitude">Latitud</label>
+                                        <input type="text" placeholder={dataCity.latitude} name='latitude' onChange={handleChange} />
+                                        <label htmlFor="longitude">Longitud</label>
+                                        <input type="text" placeholder={dataCity.longitude} name='longitude' onChange={handleChange} />
+
                                         <button onClick={updateCity}> Actualizar </button>
                                     </form>
                                 </div>

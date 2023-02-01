@@ -7,7 +7,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 //Importamos los archivos necesarios.
-import { makeRequest } from '../../../config.js/axios'
+import { makeRequest } from '../../../config/axios'
 
 const District = ({ district }) => {
     //Función para eliminar ciudades.
@@ -31,8 +31,11 @@ const District = ({ district }) => {
                 <td> {district.city.name}</td>
                 <td> {district.id}</td>
                 <td> {district.name}</td>
+                <td> {district.code}</td>
+                <td> {district.latitude}</td>
+                <td> {district.longitude}</td>
                 <td>
-                    <button><Link to={`/location/district/update/${district.id}`}>Editar</Link></button>
+                    <button><Link to={`/admin/location/district/update/${district.id}`}>Editar</Link></button>
                     <button onClick={() => handleDelete(district.id)}>Borrar</button>
                 </td>
             </tr>
