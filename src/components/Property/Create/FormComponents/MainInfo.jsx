@@ -66,8 +66,9 @@ function MainInfo() {
 
     const RenderPropertyConditions = ({ options }) => options.length > 0 ? (
         options.map((option) => (
+            //console.log(option.value)
             <Form.Group key={option.value} inline="true">
-                <Form.Check name="condition" checked={propertyInfo.condition == option.value} label={option.label} value={option.value} onChange={handlePropertyInfo} type="radio" />
+                <Form.Check name="condition" checked={propertyInfo.condition == parseInt(option.value)} label={option.label} value={option.value} onChange={handlePropertyInfo} type="radio" />
             </Form.Group>
         ))
     ) : null;
@@ -89,7 +90,6 @@ function MainInfo() {
                 });
                 return propertyUseOptions;
             })
-
 
     const RenderConditionally = ({ options, selected, onChange, label, type }) => options.length > 0 ? (
         <Form.Group className="mb-3" controlId={`property${type}`}>
@@ -188,23 +188,23 @@ function MainInfo() {
                 <Row className="align-items-center">
                     <Col sm={12} className="my-1">
                         <Form.Label> Titulo </Form.Label>
-                        <Form.Control type='text' placeholder="Ingrese un titulo para su publicación" value={mainInfo.title} onChange={handleMainInfo} />
+                        <Form.Control type='text' name="" placeholder="Ingrese un titulo para su publicación" value={mainInfo.title} onChange={handleMainInfo} />
                     </Col>
                 </Row>
                 <Row className="align-items-center">
                     <Col sm={6} className="my-1">
                         <Form.Label> Moneda </Form.Label>
-                        <Form.Control type='text' placeholder="Defina la moneda" value={mainInfo.currencyId} onChange={handleMainInfo} />
+                        <Form.Control type='text' name="" placeholder="Defina la moneda" value={mainInfo.currencyId} onChange={handleMainInfo} />
                     </Col>
                     <Col sm={6} className="my-1">
                         <Form.Label> Precio </Form.Label>
-                        <Form.Control type='number' placeholder="Defina un precio para la propiedad" value={mainInfo.price} onChange={handleMainInfo} />
+                        <Form.Control type='number' name="" placeholder="Defina un precio para la propiedad" value={mainInfo.price} onChange={handleMainInfo} />
                     </Col>
                 </Row>
                 <Row className="align-items-center">
                     <Col sm={12} className="my-1">
                         <Form.Label> Precio </Form.Label>
-                        <Form.Control as='textarea' placeholder="Detallanos acerca de la para la propiedad" value={mainInfo.description} onChange={handleMainInfo} />
+                        <Form.Control as='textarea' name="" placeholder="Detallanos acerca de la para la propiedad" value={mainInfo.description} onChange={handleMainInfo} />
                     </Col>
                 </Row>
             </Form.Group>

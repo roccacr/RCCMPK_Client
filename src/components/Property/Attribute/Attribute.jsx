@@ -23,6 +23,7 @@ const Attribute = ({ attribute }) => {
             console.log(error);
         }
     }
+
     return (
         <tbody>
             <tr>

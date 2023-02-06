@@ -61,7 +61,8 @@ const Update = () => {
                                         <label htmlFor="code">Código</label>
                                         <input type="text" placeholder={data.code} name='code' onChange={handleChange} />
                                         <label htmlFor="description">Descripcion</label>
-                                        <textarea name="description" id="" cols="30" rows="10" onChange={handleChange}></textarea>
+                                        <textarea name="description" id="" cols="30" rows="10" onChange={handleChange}
+                                        placeholder={data.description}></textarea>
                                         <button onClick={updateAttribute}> Actualizar </button>
                                     </form>
                                 </div>

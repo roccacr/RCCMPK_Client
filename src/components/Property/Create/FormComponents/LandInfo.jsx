@@ -8,9 +8,6 @@ import FormContext from '../../../../context/formContext';
 import MapComponent from '../../../../components/Map/Map';
 
 import "./propertyInfo.scss"
-import { width } from '@mui/system';
-
-const currentYear = new Date().getFullYear();
 
 function LandInfo() {
 
@@ -137,13 +134,6 @@ function LandInfo() {
             <Select id="" defaultValue={selected} options={options} isDisabled={true} />
         </Form.Group>;
 
-    const RenderCountryList = ({ options, selected }) => options.length > 0 ? (
-        <div className="country-List">
-            <label htmlFor="locationCountry">País</label>
-            <Select id="" defaultValue={selected} options={options} onChange={handleLocationCountry} />
-        </div>
-    ) : null;
-
     //Actualiza lista de estados, basado en el país
     const updateEstateList = async (countryId) => {
         const estateList = [];
@@ -174,16 +164,6 @@ function LandInfo() {
     if (locationCountry !== '' && estateListOptions.length === 0 && locationEstate === '') {
         updateEstateList(locationCountry.value);
     }
-
-    const RenderEstateList = ({ options, selected }) => options.length > 0 ? (
-        <div className="estate-List">
-            <label htmlFor="locationEstate">Estado</label>
-            <Select id="" defaultValue={selected} options={options} onChange={handleLocationEstate} />
-        </div>
-    ) : <div className="estate-List">
-        <label htmlFor="locationEstate">Estado</label>
-        <Select id="" defaultValue={selected} options={options} isDisabled={true} />
-    </div>
 
     //Actualiza lista de ciudades, basado en el estado
     const updateCityList = async (estateId) => {
@@ -216,16 +196,6 @@ function LandInfo() {
         updateCityList(locationEstate.value);
     }
 
-    const RenderCityList = ({ options, selected }) => options.length > 0 ? (
-        <div className="city-List">
-            <label htmlFor="locationCity">Ciudad</label>
-            <Select id="" defaultValue={selected} options={options} onChange={handleLocationCity} />
-        </div>
-    ) : <div className="city-List">
-        <label htmlFor="locationCity">Ciudad</label>
-        <Select id="" defaultValue={selected} options={options} isDisabled={true} />
-    </div>
-
     //Actualiza lista de distritos, basado en la ciudad.
     const updateDistrictList = async (cityId) => {
         const districtList = [];
@@ -257,16 +227,6 @@ function LandInfo() {
     if (locationCity !== '' && districtListOptions.length === 0 && locationDistrict === '') {
         updateDistrictList(locationCity.value);
     }
-
-    const RenderDistrictList = ({ options, selected }) => options.length > 0 ? (
-        <div className="district-List">
-            <label htmlFor="locationDistrict">Distrito</label>
-            <Select id="" defaultValue={selected} options={options} onChange={handleLocationDistrict} />
-        </div>
-    ) : <div className="district-List">
-        <label htmlFor="locationDistrict">Distrito</label>
-        <Select id="" defaultValue={selected} options={options} isDisabled={true} />
-    </div>
 
     return (
         <>

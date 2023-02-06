@@ -24,7 +24,7 @@ const Home = () => {
                 <div className="amenity-header">
                     <h1>Lista de Amenidades de Propiedad</h1>
                     <button>
-                        <Link to="/admin/property/use/amenity">
+                        <Link to="/admin/property/amenity/create">
                             Agregar Amenidades
                         </Link>
                     </button>
@@ -48,7 +48,7 @@ const Home = () => {
                                         </thead>
                                         {data.map(
                                             (amenity) =>
-                                                <AmenityComponent use={amenity} key={amenity.id} />
+                                                <AmenityComponent amenity={amenity} key={amenity.id} />
                                         )}
                                     </table>
                                 </div>)

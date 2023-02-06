@@ -39,7 +39,7 @@ const Create = () => {
                 <div className="create-form">
                     <form action="">
                         <label htmlFor="name">Nombre</label>
-                        <input type="text" placeholder='Alquilar' name='name' onChange={handleChange} />
+                        <input type="text" placeholder='Terraza' name='name' onChange={handleChange} />
                         <label htmlFor="code">Código</label>
                         <input type="text" placeholder='codigo' name='code' onChange={handleChange} />
                         <label htmlFor="description">Descripcion</label>

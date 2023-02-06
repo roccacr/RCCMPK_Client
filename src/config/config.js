@@ -5,7 +5,7 @@ module.exports = {
      *      desarrollo
      *      produccion
      */
-    ambiente: "desarrollo",
+    ambiente: "produccion",
     baseUrl: {
         desarrollo: "http://localhost:3250/api",
         produccion: "http://marketplace.roccacr.com/api",

@@ -24,7 +24,7 @@ const Home = () => {
                 <div className="attribute-header">
                     <h1>Lista de Atributos de Propiedad</h1>
                     <button>
-                        <Link to="/admin/property/use/create">
+                        <Link to="/admin/property/attribute/create">
                             Agregar Atributos de Propiedad
                         </Link>
                     </button>
@@ -48,7 +48,7 @@ const Home = () => {
                                         </thead>
                                         {data.map(
                                             (attribute) =>
-                                                <AttributeComponent use={attribute} key={attribute.id} />
+                                                <AttributeComponent attribute={attribute} key={attribute.id} />
                                         )}
                                     </table>
                                 </div>)
