@@ -5,7 +5,7 @@ module.exports = {
      *      desarrollo
      *      produccion
      */
-    ambiente: "produccion",
+    ambiente: "desarrollo",
     baseUrl: {
         desarrollo: "http://localhost:3250/api",
         produccion: "http://marketplace.roccacr.com/api",
@@ -48,6 +48,12 @@ module.exports = {
         updatePropertyAmenity: "/pm/property/config/amenity/Update",
         findPropertyAmenityById: "/pm/property/config/amenityById",
         deletePropertyAmenity: "/pm/property/config/amenity/Delete",
+        //Topografías de Terreno (Propiedad)
+        listLandTopography: "/pm/property/config/landTopography/List",
+        createLandTopography: "/pm/property/config/landTopography/Create",
+        updateLandTopography: "/pm/property/config/landTopography/Update",
+        findLandTopographyById: "/pm/property/config/landTopographyById",
+        deleteLandTopography: "/pm/property/config/landTopography/Delete",
         //Ubicaciones - Paises
         listLocationCountry: "/lm/location/country/List",
         createLocationCountry: "/lm/location/country/Create",

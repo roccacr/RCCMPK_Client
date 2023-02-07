@@ -310,11 +310,11 @@ function LandInfo() {
                 <Row className="align-items-center">
                     <Col sm={5} className="my-1">
                         <Form.Label>Latitud</Form.Label>
-                        <Form.Control type='text' name="locationDetails" placeholder="Indique los detalles de la ubicación" value={landInfo.locationLatitude} onChange={handleLandInfo} />
+                        <Form.Control type='text' name="locationLatitude" placeholder="Indique los detalles de la ubicación" value={landInfo.locationLatitude} onChange={handleLandInfo} />
                     </Col>
                     <Col sm={5} className="my-1">
                         <Form.Label>Longitud</Form.Label>
-                        <Form.Control type='text' name="locationDetails" placeholder="Indique los detalles de la ubicación" value={landInfo.locationLongitude} onChange={handleLandInfo} />
+                        <Form.Control type='text' name="locationLongitude" placeholder="Indique los detalles de la ubicación" value={landInfo.locationLongitude} onChange={handleLandInfo} />
                     </Col>
                     <Col sm={2} className="my-1">
                         <ButtonGroup className="mb-2">
@@ -331,7 +331,7 @@ function LandInfo() {
                     </Col>
                 </Row>
             </Form.Group>
-            <div className="info-map-location" style={{ height: "500px", "max-width": "100%" }}>
+            <div className="info-map-location" style={{ height: "500px", "maxWidth": "100%" }}>
                 <MapComponent coords={coords} zoom={zoom} currentLocation={currentLocation} />
             </div>
         </>

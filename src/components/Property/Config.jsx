@@ -18,10 +18,13 @@ const Config = () => {
                 <Link to={"/admin/property/condition"}>Condiciones</Link>
             </div>
             <div className="condition">
-                <Link to={"/admin/property/amenity"}>Amenidades (En desarrollo)</Link>
+                <Link to={"/admin/property/amenity"}>Amenidades</Link>
             </div>
             <div className="condition">
-                <Link to={"/admin/property/attribute"}>Características (En desarrollo)</Link>
+                <Link to={"/admin/property/attribute"}>Características</Link>
+            </div>
+            <div className="condition">
+                <Link to={"/admin/property/topography"}>Topografía de Suelo</Link>
             </div>
         </div>
     )

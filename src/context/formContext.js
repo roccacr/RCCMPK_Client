@@ -56,19 +56,8 @@ export const FormProvider = ({ children }) => {
         buildLevels: "",
     })
 
-    const [propertyCharacteristics, setPropertyCharacteristics] = useState({
-        livingRoom: false,
-        kitchen: false,
-        cellar: false,
-        serviceRoom: false,
-        breakfastNook: false,
-        garden: false,
-        officeRoom: false,
-        balcony: false,
-        diningRoom: false,
-        terrace: false,
-        cleaningRoom: false,
-    })
+    const [amenity, setAmenity] = useState({});
+    const [attribute, setAttribute] = useState({});
 
     //Imagenes
     const [selectedImagesForm, setSelectedImagesForm] = useState([]);
@@ -82,7 +71,7 @@ export const FormProvider = ({ children }) => {
         formData.append("useId", propUse.value);
         formData.append("typeId", propType.value);
         formData.append("subTypeId", propSubType.value);
-        formData.append("conditionId",propertyInfo.condition);
+        formData.append("conditionId", propertyInfo.condition);
         formData.append("buildYear", propertyInfo.buildYear);
         formData.append("buildSize", propertyInfo.buildSize);
         formData.append("buildWidth", propertyInfo.buildWidth);
@@ -103,7 +92,7 @@ export const FormProvider = ({ children }) => {
         formData.append("locationLatitude", landInfo.locationLatitude);
         formData.append("locationLongitude", landInfo.locationLongitude);
 
-        for (let i = 0; i < selectedImagesForm.length; i++){
+        for (let i = 0; i < selectedImagesForm.length; i++) {
             console.log(selectedImagesForm[i]);
             formData.append("file", selectedImagesForm[i]);
         }
@@ -139,12 +128,15 @@ export const FormProvider = ({ children }) => {
             landInfo, setLandInfo,
             //Segmento de otra información.
             otherInfo, setOtherInfo,
-            propertyCharacteristics, setPropertyCharacteristics,
             //Imagenes
             selectedImagesForm, setSelectedImagesForm,
 
             //Función para enviar
             registerProperty,
+
+            //Amenidades: 
+            amenity, setAmenity,
+            attribute, setAttribute
         }}>
             {children}
         </FormContext.Provider>

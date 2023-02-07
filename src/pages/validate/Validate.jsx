@@ -21,7 +21,8 @@ const Validate = () => {
 
     useEffect(() => {
         if (ioeua == null) {
-            navigate("/login")
+            alert("Hay algo nulo");
+            //navigate("/login")
         }
     })
 
@@ -31,11 +32,12 @@ const Validate = () => {
             email: decodeBase64(emoeua),
         }
         try {
+            alert("Los datos llegaron bien");
             setExternalUser(userData);
             navigate("/");
         } catch (err) {
             alert(err);
-            navigate("/login");
+            //navigate("/login");
         }
     }, [navigate, setExternalUser, ioeua, emoeua])
 

@@ -188,23 +188,23 @@ function MainInfo() {
                 <Row className="align-items-center">
                     <Col sm={12} className="my-1">
                         <Form.Label> Titulo </Form.Label>
-                        <Form.Control type='text' name="" placeholder="Ingrese un titulo para su publicación" value={mainInfo.title} onChange={handleMainInfo} />
+                        <Form.Control type='text' name="title" placeholder="Ingrese un titulo para su publicación" value={mainInfo.title} onChange={handleMainInfo} />
                     </Col>
                 </Row>
                 <Row className="align-items-center">
                     <Col sm={6} className="my-1">
                         <Form.Label> Moneda </Form.Label>
-                        <Form.Control type='text' name="" placeholder="Defina la moneda" value={mainInfo.currencyId} onChange={handleMainInfo} />
+                        <Form.Control type='text' name="currencyId" placeholder="Defina la moneda" value={mainInfo.currencyId} onChange={handleMainInfo} />
                     </Col>
                     <Col sm={6} className="my-1">
                         <Form.Label> Precio </Form.Label>
-                        <Form.Control type='number' name="" placeholder="Defina un precio para la propiedad" value={mainInfo.price} onChange={handleMainInfo} />
+                        <Form.Control type='number' name="price" placeholder="Defina un precio para la propiedad" value={mainInfo.price} onChange={handleMainInfo} />
                     </Col>
                 </Row>
                 <Row className="align-items-center">
                     <Col sm={12} className="my-1">
-                        <Form.Label> Precio </Form.Label>
-                        <Form.Control as='textarea' name="" placeholder="Detallanos acerca de la para la propiedad" value={mainInfo.description} onChange={handleMainInfo} />
+                        <Form.Label> Descripción </Form.Label>
+                        <Form.Control as='textarea' name="description" placeholder="Detallanos acerca de la para la propiedad" value={mainInfo.description} onChange={handleMainInfo} />
                     </Col>
                 </Row>
             </Form.Group>

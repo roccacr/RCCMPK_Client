@@ -57,6 +57,9 @@ import PropertyAmenityUpdate from "./pages/Property/Amenity/Update.jsx";
 import PropertyAttributeAdd from "./pages/Property/Attribute/Create.jsx"
 import PropertyAttributeUpdate from "./pages/Property/Attribute/Update.jsx";
 import PropertyAttributeList from "./pages/Property/Attribute/Home.jsx";
+import PropertyTopographyAdd from "./pages/Property/Topography/Create.jsx"
+import PropertyTopographyUpdate from "./pages/Property/Topography/Update.jsx";
+import PropertyTopographyList from "./pages/Property/Topography/Home.jsx";
 
 
 function App() {
@@ -92,6 +95,7 @@ function App() {
         { path: "/", element: <Home />, },
         { path: "/property/create", element: <Create /> },
         { path: "/administration", element: <Admin />, },
+        //Ubicación.
         { path: "/admin/location/country", element: <CountryList /> },
         { path: "/admin/location/country/create", element: <CountryAdd /> },
         { path: "/admin/location/country/update/:id", element: <CountryUpdate /> },
@@ -104,6 +108,7 @@ function App() {
         { path: "/admin/location/district", element: <DistrictList /> },
         { path: "/admin/location/district/create", element: <DistrictAdd /> },
         { path: "/admin/location/district/update/:id", element: <DistrictUpdate /> },
+        //Propiedad
         { path: "/admin/property/type", element: <PropertyTypeList /> },
         { path: "/admin/property/type/create", element: <PropertyTypeAdd /> },
         { path: "/admin/property/type/update/:id", element: <PropertyTypeUpdate /> },
@@ -122,6 +127,13 @@ function App() {
         { path: "/admin/property/attribute", element: <PropertyAttributeList /> },
         { path: "/admin/property/attribute/create", element: <PropertyAttributeAdd /> },
         { path: "/admin/property/attribute/update/:id", element: <PropertyAttributeUpdate /> },
+        { path: "/admin/property/topography", element: <PropertyTopographyList /> },
+        { path: "/admin/property/topography/create", element: <PropertyTopographyAdd /> },
+        { path: "/admin/property/topography/update/:id", element: <PropertyTopographyUpdate /> },
+        //General
+        { path: "/admin/config/currency", element: <PropertyTopographyList /> },
+        { path: "/admin/config/currency/create", element: <PropertyTopographyAdd /> },
+        { path: "/admin/config/currency/update/:id", element: <PropertyTopographyUpdate /> },
       ],
     },
     { path: "/login", element: <Login /> },

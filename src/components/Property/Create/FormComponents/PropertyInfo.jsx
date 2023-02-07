@@ -43,29 +43,29 @@ const PropertyInfo = () => {
                 <Row className="align-items-center">
                     <Col sm={12} className="my-1">
                         <Form.Label>Empresa Constructora</Form.Label>
-                        <Form.Control type='number' name="buildLength" placeholder="Nombre de la empresa encargada de la construcción." value={propertyInfo.buildCompany} onChange={handlePropertyInfo} />
+                        <Form.Control type='text' name="buildCompany" placeholder="Nombre de la empresa encargada de la construcción." value={propertyInfo.buildCompany} onChange={handlePropertyInfo} />
                     </Col>
                     <Col sm={6} className="my-1">
                         <Form.Label>Ingeniero</Form.Label>
-                        <Form.Control type='number' name="buildLength" placeholder="Nombre Ingeniero." value={propertyInfo.buildEngineer} onChange={handlePropertyInfo} />
+                        <Form.Control type='text' name="buildEngineer" placeholder="Nombre Ingeniero." value={propertyInfo.buildEngineer} onChange={handlePropertyInfo} />
                     </Col>
                     <Col sm={6} className="my-1">
                         <Form.Label>Arquitecto</Form.Label>
-                        <Form.Control type='number' name="buildLength" placeholder="Nombre Arquitecto." value={propertyInfo.buildArchitect} onChange={handlePropertyInfo} />
+                        <Form.Control type='text' name="buildArchitect" placeholder="Nombre Arquitecto." value={propertyInfo.buildArchitect} onChange={handlePropertyInfo} />
                     </Col>
                 </Row>
                 <Row className="align-items-center">
                     <Col sm={4} className="my-1">
                         <Form.Label> # Cuartos <FaBed /></Form.Label>
-                        <Form.Control type='number' name="buildLength" placeholder="Cant. Habitaciones." value={propertyInfo.bedrooms} onChange={handlePropertyInfo} />
+                        <Form.Control type='number' name="bedrooms" placeholder="Cant. Habitaciones." value={propertyInfo.bedrooms} onChange={handlePropertyInfo} />
                     </Col>
                     <Col sm={4} className="my-1">
                         <Form.Label> # Baños <FaShower /></Form.Label>
-                        <Form.Control type='number' name="buildLength" placeholder="Cant. Baños." value={propertyInfo.bathrooms} onChange={handlePropertyInfo} />
+                        <Form.Control type='number' name="bathrooms" placeholder="Cant. Baños." value={propertyInfo.bathrooms} onChange={handlePropertyInfo} />
                     </Col>
                     <Col sm={4} className="my-1">
                         <Form.Label> # Parqueo <FaParking /></Form.Label>
-                        <Form.Control type='number' name="buildLength" placeholder="Cant. Espacios parqueo." value={propertyInfo.parking} onChange={handlePropertyInfo} />
+                        <Form.Control type='number' name="parking" placeholder="Cant. Espacios parqueo." value={propertyInfo.parking} onChange={handlePropertyInfo} />
                     </Col>
                 </Row>
             </Form.Group>

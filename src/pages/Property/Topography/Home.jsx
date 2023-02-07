@@ -5,14 +5,14 @@ import { Table, Button, Container, Row, Col } from 'react-bootstrap';
 import { BsFillCaretLeftFill } from 'react-icons/bs'
 
 //Importamos las páginas relacionadas.
-import TypeComponent from '../../../components/Property/Type/Type';
+import TopographyComponent from '../../../components/Property/Topography/Topography';
 import { makeRequest } from '../../../config/axios';
 import { serverRoutes } from '../../../config/config';
 
 const Home = () => {
 
-    const { isLoading, error, data } = useQuery(["propertyTypes"], () =>
-        makeRequest.get(serverRoutes.listPropertyType)
+    const { isLoading, error, data } = useQuery(["landTopography"], () =>
+        makeRequest.get(serverRoutes.listLandTopography)
             .then((response) => {
                 return response.data;
             })
@@ -25,15 +25,15 @@ const Home = () => {
                     <Button> <BsFillCaretLeftFill /><Link to={"/administration"} style={{ textDecoration: "none", color: "white" }}>Volver a Administración</Link></Button>
                 </Col>
                 <Col sm={9} className="my-1">
-                    <h1>Lista de Tipos de Propiedad</h1>
+                    <h1>Lista de Topografías de Terreno</h1>
                 </Col>
             </Row>
             <Row className='body'>
                 {
                     error
-                        ? "Error al obtener la lista de tipos de propiedad"
+                        ? "Error al obtener la lista de topografías de Terreno"
                         : isLoading
-                            ? "Obteniendo tipos de propiedad"
+                            ? "Obteniendo topografías de Terreno"
                             : (<div className='list'>
                                 <Table responsive="sm" bordered hover>
                                     <thead>
@@ -46,8 +46,8 @@ const Home = () => {
                                         </tr>
                                     </thead>
                                     {data.map(
-                                        (type) =>
-                                            <TypeComponent type={type} key={type.id} />
+                                        (topography) =>
+                                            <TopographyComponent topography={topography} key={topography.id} />
                                     )}
                                 </Table>
                             </div>)
@@ -56,8 +56,8 @@ const Home = () => {
             <Row>
                 <Col sm={12} className="my-1 d-flex justify-content-end">
                     <Button>
-                        <Link to="/admin/property/type/create" style={{ textDecoration: "none", color: "white" }}>
-                            Agregar Tipo de Propiedad
+                        <Link to="/admin/property/topography/create" style={{ textDecoration: "none", color: "white" }}>
+                            Agregar Topografía de Terreno
                         </Link>
                     </Button>
                 </Col>
