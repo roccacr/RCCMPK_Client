@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import FormContext from '../../../../context/formContext';
 import { FaBed, FaShower, FaParking } from "react-icons/fa"
-
-import "./propertyInfo.scss"
 import { Form, Row, Col } from 'react-bootstrap';
 
 const currentYear = new Date().getFullYear();

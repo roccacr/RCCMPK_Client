@@ -1,8 +1,10 @@
 import React from 'react'
 import moment from "moment";
+import { Link } from 'react-router-dom';
+import { BsEyeFill } from 'react-icons/bs'
 
 //Importamos la hoja de diseño css
-import "./property.scss"
+import "./listing.scss"
 
 //Importamos los componentes requeridos.
 import Images from "./Images.jsx"
@@ -13,7 +15,7 @@ import BedIcon from '@mui/icons-material/Bed';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
 
-const Property = ({ property }) => {
+const Listing = ({ property }) => {
 
     const imgArray = property.propertyImages.imageUrl;
     return (
@@ -31,15 +33,19 @@ const Property = ({ property }) => {
                     <ShowerIcon /> <span>{property.buildDetails.bathrooms} |</span >
                     <BedIcon /> <span>{property.buildDetails.bedrooms} | </span>
                     <DirectionsCarIcon /><span>{property.buildDetails.parking} | </span>
-                    <StraightenOutlinedIcon /><span>{property.propertyLand.landSize} m²</span>
-
+                    <StraightenOutlinedIcon /><span>{property.propertyLand?.landSize} m²</span>
                 </div>
                 <div className="otherInfo">
                     <span> Published: {moment(property.createdAt).fromNow()} </span>
+                    <button>
+                        <Link to={`/property/details/${property.id}`}>
+                            <h6> <BsEyeFill /> Ver</h6>
+                        </Link>
+                    </button>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Property
+export default Listing

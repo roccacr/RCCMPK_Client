@@ -9,7 +9,7 @@ const Update = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const topographyId = location.pathname.split("/")[5];
+    const currencyId = location.pathname.split("/")[5];
 
     const [inputs, setInputs] = useState({ name: "", description: "", });
 
@@ -17,20 +17,20 @@ const Update = () => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const { isLoading, error, data } = useQuery(["landTopographytoUpdate"], () =>
-        makeRequest.get(`${serverRoutes.findLandTopographyById}/${topographyId}`).then((response) => {
+    const { isLoading, error, data } = useQuery(["currencytoUpdate"], () =>
+        makeRequest.get(`${serverRoutes.findGeneralCurrencyById}/${currencyId}`).then((response) => {
             return response.data;
         })
     );
 
-    const updateTopography = async (e) => {
+    const updateCurrency = async (e) => {
         try {
             e.preventDefault();
-            const topography = await makeRequest.put(`${serverRoutes.updatePropertyType}/${topographyId}`, inputs);
-            if (topography.data === 1) {
+            const currency = await makeRequest.put(`${serverRoutes.updateGeneralCurrency}/${currencyId}`, inputs);
+            if (currency.data === 1) {
                 alert("Registro actualizado correctamente.")
             };
-            navigate("/admin/property/topography");
+            navigate("/admin/config/currency");
         } catch (error) {
             console.log(error);
         }
@@ -38,20 +38,20 @@ const Update = () => {
 
     return (
         <div className='container'>
-            <div className="topography-header">
-                <h1>Actualizar Topografía de Terreno</h1>
+            <div className="currency-header">
+                <h1>Actualizar Moneda</h1>
                 <button>
-                    <Link to="/admin/property/topography/">
-                    Lista de Topografías de Terreno
+                    <Link to="/admin/config/currency/">
+                    Lista de Monedas
                     </Link>
                 </button>
             </div>
-            <div className="topography-body">
+            <div className="currency-body">
                 {
                         error
-                        ? "Error al obtener la lista de topografías de Terreno"
+                        ? "Error al obtener la lista de monedas"
                         : isLoading
-                            ? "Obteniendo topografías de Terreno"
+                            ? "Obteniendo lista de monedas" 
                             : (
                                 <div className="update-form">
                                     <form action="">
@@ -59,11 +59,9 @@ const Update = () => {
                                         <input type="text" placeholder={data.id} name='id' disabled />
                                         <label htmlFor="name">Nombre</label>
                                         <input type="text" placeholder={data.name} name='name' onChange={handleChange} />
-                                        <label htmlFor="code">Código</label>
-                                        <input type="text" placeholder={data.code} name='code' onChange={handleChange} />
-                                        <label htmlFor="description">Descripcion</label>
-                                        <textarea name="description" placeholder={data.description} id="" cols="30" rows="10" onChange={handleChange}></textarea>
-                                        <button onClick={updateTopography}> Actualizar </button>
+                                        <label htmlFor="exchangeRate">Tipo de Cambio</label>
+                                        <input type="text" placeholder={data.exchangeRate} name='exchangeRate' onChange={handleChange} />
+                                        <button onClick={updateCurrency}> Actualizar </button>
                                     </form>
                                 </div>
                             )

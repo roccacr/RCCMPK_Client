@@ -5,9 +5,9 @@ import { serverRoutes } from '../../../config/config';
 import HomeComponent from '../../../components/General/Admin/Home'
 
 const Home = () => {
-    const type = "Topografía de Suelo"
-    const route = serverRoutes.listLandTopography
-    const createURL = "/admin/property/topography/create"
+    const type = "Monedas"
+    const route = serverRoutes.listGeneralCurrency
+    const createURL = "/admin/config/currency/create"
 
     const { isLoading, error, data } = useQuery([type], () =>
         makeRequest.get(route)

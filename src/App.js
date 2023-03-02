@@ -18,6 +18,7 @@ import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx"
 import Create from "./pages/Property/Create.jsx";
+import Details from "./pages/Property/Details.jsx";
 
 //Importamos los componentes a utilizar.
 import NavigationBar from "./components/Navbar/NavigationBar.jsx";
@@ -60,6 +61,10 @@ import PropertyAttributeList from "./pages/Property/Attribute/Home.jsx";
 import PropertyTopographyAdd from "./pages/Property/Topography/Create.jsx"
 import PropertyTopographyUpdate from "./pages/Property/Topography/Update.jsx";
 import PropertyTopographyList from "./pages/Property/Topography/Home.jsx";
+//Configuracion de general del sistema.
+import GeneralCurrencyAdd from "./pages/GeneralConfig/Currency/Create.jsx";
+import GeneralCurrencyUpdate from "./pages/GeneralConfig/Currency/Update.jsx";
+import GeneralCurrencyList from "./pages/GeneralConfig/Currency/Home.jsx";
 
 
 function App() {
@@ -94,6 +99,7 @@ function App() {
       children: [
         { path: "/", element: <Home />, },
         { path: "/property/create", element: <Create /> },
+        { path: "/property/details/:id", element: <Details /> },
         { path: "/administration", element: <Admin />, },
         //Ubicación.
         { path: "/admin/location/country", element: <CountryList /> },
@@ -131,9 +137,9 @@ function App() {
         { path: "/admin/property/topography/create", element: <PropertyTopographyAdd /> },
         { path: "/admin/property/topography/update/:id", element: <PropertyTopographyUpdate /> },
         //General
-        { path: "/admin/config/currency", element: <PropertyTopographyList /> },
-        { path: "/admin/config/currency/create", element: <PropertyTopographyAdd /> },
-        { path: "/admin/config/currency/update/:id", element: <PropertyTopographyUpdate /> },
+        { path: "/admin/config/currency", element: <GeneralCurrencyList /> },
+        { path: "/admin/config/currency/create", element: <GeneralCurrencyAdd /> },
+        { path: "/admin/config/currency/update/:id", element: <GeneralCurrencyUpdate /> },
       ],
     },
     { path: "/login", element: <Login /> },

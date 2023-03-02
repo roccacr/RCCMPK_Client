@@ -37,6 +37,10 @@ export const FormProvider = ({ children }) => {
     const [estateListOptions, setEstateListOptions] = useState([]);
     const [cityListOptions, setCityListOptions] = useState([]);
     const [districtListOptions, setDistrictListOptions] = useState([]);
+    //Datos de la mondeda.
+    const [currency, setCurrency] = useState('');
+    //Topografia del suelo.
+    const [topography, setTopography] = useState('');
 
     const [currentLocation, setCurrentLocation] = useState(false);
 
@@ -64,14 +68,14 @@ export const FormProvider = ({ children }) => {
 
     const createFormData = () => {
         const formData = new FormData();
-        formData.append("title", mainInfo.title);
-        formData.append("description", mainInfo.description);
-        formData.append("currencyId", mainInfo.currencyId);
-        formData.append("price", mainInfo.price);
         formData.append("useId", propUse.value);
         formData.append("typeId", propType.value);
         formData.append("subTypeId", propSubType.value);
         formData.append("conditionId", propertyInfo.condition);
+        formData.append("title", mainInfo.title);
+        formData.append("currencyId", currency.value);
+        formData.append("price", mainInfo.price);
+        formData.append("description", mainInfo.description);
         formData.append("buildYear", propertyInfo.buildYear);
         formData.append("buildSize", propertyInfo.buildSize);
         formData.append("buildWidth", propertyInfo.buildWidth);
@@ -85,9 +89,13 @@ export const FormProvider = ({ children }) => {
         formData.append("landSize", landInfo.landSize);
         formData.append("landWidth", landInfo.landWidth);
         formData.append("landLength", landInfo.landLength);
-        formData.append("landTopography", landInfo.landTopography);
+        formData.append('topographyId', topography.value)
         formData.append("parcelNumber", landInfo.parcelNumber);
         formData.append("plan", landInfo.plan);
+        formData.append("countryId", locationCountry.value);
+        formData.append("estateId", locationEstate.value);
+        formData.append("cityId", locationCity.value);
+        formData.append("districtId", locationDistrict.value);
         formData.append("locationDetails", landInfo.locationDetails);
         formData.append("locationLatitude", landInfo.locationLatitude);
         formData.append("locationLongitude", landInfo.locationLongitude);
@@ -104,7 +112,10 @@ export const FormProvider = ({ children }) => {
         const propertyData = createFormData();
         console.log(propertyData);
         const res = await makeRequest.post("/pm/property/createProperty", propertyData);
-        console.log("Resultado: ", JSON.stringify(res.data));
+        if(res.status == 200) {
+            alert("Propiedad Creada Correctamente.");
+        }
+        console.log("Resultado: ", JSON.stringify(res));
     };
 
     return (
@@ -136,7 +147,9 @@ export const FormProvider = ({ children }) => {
 
             //Amenidades: 
             amenity, setAmenity,
-            attribute, setAttribute
+            attribute, setAttribute,
+            currency, setCurrency,
+            topography, setTopography
         }}>
             {children}
         </FormContext.Provider>

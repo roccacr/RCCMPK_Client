@@ -1,14 +1,10 @@
 import React, { useState, useContext } from 'react'
-import Form from 'react-bootstrap/Form';
+import { Form, Row, Col } from 'react-bootstrap';
 import Select from "react-select";
 import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from '../../../../config/axios';
 import { serverRoutes } from '../../../../config/config';
 import FormContext from '../../../../context/formContext';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import "./mainInfo.scss"
 
 function MainInfo() {
 
@@ -18,11 +14,13 @@ function MainInfo() {
         propSubType, setPropSubType,
         propUse, setPropUse,
         propertyInfo, setPropertyInfo,
+        currency, setCurrency
     } = useContext(FormContext);
 
     const propertyTypeOptions = [];
     const propertyUseOptions = [];
     const propConditionOptions = [];
+    const currencyOptions = []
     const [propSubTypeOptions, setPropSubTypeOptions] = useState([]);
 
     const handlePropertyInfo = (e) => {
@@ -42,9 +40,33 @@ function MainInfo() {
         setPropUse(useOption);
     }
 
+    const handleCurrency = (currencyOption) => {
+        setCurrency(currencyOption);
+    }
+
     const handleMainInfo = (e) => {
         setMainInfo({ ...mainInfo, [e.target.name]: e.target.value })
     }
+
+
+    //Obtiene las monedas disponibles
+    const { isLoading: isLoadingCurrency, error: errorCurrency, data: dataCurrency } = useQuery(["currencies"], () =>
+        makeRequest.get(serverRoutes.listGeneralCurrency).then((response) => {
+            return response.data
+        }),
+    )
+    errorCurrency
+        ? currencyOptions.push({ value: "0", label: "Error" })
+        : isLoadingCurrency
+            ? currencyOptions.push({ value: "0", label: "Obteniendo usos de propiedad." })
+            : dataCurrency.map(propertyCondition => {
+                currencyOptions.push({
+                    value: propertyCondition.id,
+                    label: propertyCondition.name,
+                });
+                return currencyOptions;
+            })
+
 
     //Obtiene las condiciones de propiedad
     const { isLoading: isLoadingPropCondition, error: errorPropCondition, data: dataPropCondition } = useQuery(["propertyConditions"], () =>
@@ -193,8 +215,13 @@ function MainInfo() {
                 </Row>
                 <Row className="align-items-center">
                     <Col sm={6} className="my-1">
-                        <Form.Label> Moneda </Form.Label>
-                        <Form.Control type='text' name="currencyId" placeholder="Defina la moneda" value={mainInfo.currencyId} onChange={handleMainInfo} />
+                        <RenderConditionally
+                            options={currencyOptions}
+                            selected={currency === "" ? { value: null, label: "Seleccione una moneda." } : currency}
+                            onChange={handleCurrency}
+                            label="Moneda"
+                            type="currency"
+                        />
                     </Col>
                     <Col sm={6} className="my-1">
                         <Form.Label> Precio </Form.Label>

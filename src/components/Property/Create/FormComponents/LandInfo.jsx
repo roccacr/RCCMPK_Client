@@ -7,8 +7,6 @@ import { serverRoutes } from '../../../../config/config';
 import FormContext from '../../../../context/formContext';
 import MapComponent from '../../../../components/Map/Map';
 
-import "./propertyInfo.scss"
-
 function LandInfo() {
 
     const { landInfo, setLandInfo, currentLocation, setCurrentLocation,
@@ -16,10 +14,12 @@ function LandInfo() {
         locationCity, setLocationCity, locationDistrict, setLocationDistrict,
         estateListOptions, setEstateListOptions,
         cityListOptions, setCityListOptions,
-        districtListOptions, setDistrictListOptions
+        districtListOptions, setDistrictListOptions,
+        topography, setTopography
     } = useContext(FormContext);
 
     const countryListOptions = [];
+    const topographyListOptions = [];
     const [coords, setCoords] = useState({ lat: 0, lng: 0 });
     const [zoom, setZoom] = useState(8);
 
@@ -49,6 +49,10 @@ function LandInfo() {
 
     const handleLandInfo = (e) => {
         setLandInfo({ ...landInfo, [e.target.name]: e.target.value })
+    }
+
+    const handleTopography = (topographyOption) => {
+        setTopography(topographyOption);
     }
 
     const handleLocationCountry = (countryOption) => {
@@ -102,6 +106,24 @@ function LandInfo() {
         setLandInfo(prevLandInfo => ({ ...prevLandInfo, "locationLatitude": parseFloat(districtOption.latitude) }));
         setLandInfo(prevLandInfo => ({ ...prevLandInfo, "locationLongitude": parseFloat(districtOption.longitude) }));
     }
+
+    //Obtiene la lista de topografias.
+    const { isLoading: isLoadingLandTopography, error: errorLandTopography, data: dataLandTopography } = useQuery(["topographyList"], () =>
+        makeRequest.get(serverRoutes.listLandTopography).then((response) => {
+            return response.data
+        }),
+    )
+    errorLandTopography
+        ? topographyListOptions.push({ value: "0", label: "Error" })
+        : isLoadingLandTopography
+            ? topographyListOptions.push({ value: "0", label: "Obteniendo lista de topografias." })
+            : dataLandTopography.map(topography => {
+                topographyListOptions.push({
+                    value: topography.id,
+                    label: topography.name,
+                });
+                return topographyListOptions;
+            })
 
     //Obtiene la lista de países.
     const { isLoading: isLoadingCountryList, error: errorCountryList, data: dataCountryList } = useQuery(["countryList"], () =>
@@ -247,8 +269,13 @@ function LandInfo() {
                 </Row>
                 <Row className="align-items-center">
                     <Col sm={4} className="my-1">
-                        <Form.Label>Topografía</Form.Label>
-                        <Form.Control type='text' name="landTopography" placeholder="Defina la topografía" value={landInfo.landTopography} onChange={handleLandInfo} />
+                        <RenderConditionally
+                            options={topographyListOptions}
+                            selected={topography === "" ? { value: null, label: "Defina la topografía." } : topography}
+                            onChange={handleTopography}
+                            label="Topografía"
+                            type="topography"
+                        />
                     </Col>
                     <Col sm={4} className="my-1">
                         <Form.Label>Número de Finca</Form.Label>

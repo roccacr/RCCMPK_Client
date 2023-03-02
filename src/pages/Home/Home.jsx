@@ -6,7 +6,7 @@ import { makeRequest } from '../../config/axios'
 import { useQuery } from "@tanstack/react-query";
 
 //Importamos las páginas relacionadas.
-import Property from '../../components/Property/Property.jsx';
+import Property from '../../components/Property/Listing';
 
 //Importamos la hoja de diseño css
 import "./home.scss"

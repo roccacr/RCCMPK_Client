@@ -11,6 +11,10 @@ module.exports = {
         produccion: "http://marketplace.roccacr.com/api",
     },
     serverRoutes: {
+
+        //Propiedades
+        getPropertyById: "/pm/property/propertyById",
+        
         //Tipos de propiedad:
         listPropertyType: "/pm/property/config/type/List",
         createPropertyType: "/pm/property/config/type/Create",
@@ -81,6 +85,12 @@ module.exports = {
         updateLocationDistrict: "/lm/location/district/Update",
         findLocationDistrictById: "/lm/location/districtById",
         deleteLocationDistrict: "/lm/location/district/Delete",
+        //General - Moneda
+        listGeneralCurrency: "/cm/general/currency/List",
+        createGeneralCurrency: "/cm/general/currency/Create",
+        updateGeneralCurrency: "/cm/general/currency/Update",
+        findGeneralCurrencyById: "/cm/general/currencyById",
+        deleteGeneralCurrency: "/cm/general/currency/Delete",
     }
 
 }

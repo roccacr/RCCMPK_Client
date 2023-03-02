@@ -1,71 +1,31 @@
-/**
- * Página para visualizar la lista de ciudades.
- */
-
-//Importamos las bibliotecas necesarias.
 import React from 'react'
-import { Link } from 'react-router-dom';
 import { useQuery } from "@tanstack/react-query";
-
-//Importamos los archivos necesarios.
 import { makeRequest } from '../../../config/axios';
-
-//Importamos los componentes relacionadas.
-import DistrictComponent from '../../../components/Location/District/District.jsx'
+import { serverRoutes } from '../../../config/config';
+import HomeComponent from '../../../components/General/Admin/Home'
 
 const Home = () => {
-    //Inician consultas a la base de datos.
-    const { isLoading, error, data } = useQuery(["districts"], () =>
-        makeRequest.get("/lm/location/district/List")
+    const type = "Distritos"
+    const route = serverRoutes.listLocationDistrict
+    const createURL = "/admin/Location/district/create"
+
+    const { isLoading, error, data } = useQuery([type], () =>
+        makeRequest.get(route)
             .then((response) => {
                 return response.data;
             })
     );
     return (
-        <div className="container">
-            <div className="districts">
-                <button><Link to={"/administration"}>Volver a Ubicación</Link></button>
-                <div className="district-header">
-                    <h1>Lista de Distritos</h1>
-                    <button>
-                        <Link to="/admin/location/district/create">
-                            Agregar Distritos
-                        </Link>
-                    </button>
-                </div>
-                <div className="district-body">
-                    {/* Validamos información obtenida desde BD. */}
-                    {
-                        error
-                            ? "Error al obtener la lista de Distritos"
-                            : isLoading
-                                ? "Obteniendo Distritos"
-                                : (<div className='District-list'>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>País</th>
-                                                <th>Estado</th>
-                                                <th>Ciudad</th>
-                                                <th>Id</th>
-                                                <th>Nombre</th>
-                                                <th>Código</th>
-                                                <th>Latitud</th>
-                                                <th>Longitud</th>
-                                                <th colSpan={3}>Aciones</th>
-                                            </tr>
-                                        </thead>
-                                        {/* Iteramos y pasamos al componente. */}
-                                        {data.map(
-                                            (district) =>
-                                                <DistrictComponent district={district} key={district.id} />
-                                        )}
-                                    </table>
-                                </div>)
-                    }
-                </div>
-            </div>
-        </div>
+        <>
+            {
+                error
+                    ? (<h3>Error al obtener la lista de {type}</h3>)
+                    : isLoading
+                        ? (<h3>Obteniendo la lista de {type}</h3>)
+                        : <HomeComponent type={type} data={data} createURL={createURL}/> 
+                        
+            }
+        </>
     )
 }
 
